@@ -6,11 +6,27 @@ import { Platform } from "react-native";
 import Planets from "./Planets";
 import Films from "./Films";
 import Spaceships from "./Spaceships";
+import React, {useEffect} from "react";
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+
 export default function App() {
+
+useEffect(() => {
+  getData();
+},[]);
+  
+  const getData = () => {
+    const URL = "https://swapi.tech/api/";
+
+    fetch(URL).then(res =>{
+      return res.json // convert to readable format
+    }).then(data=> {
+      console.log(data);
+    })
+  }
   return (
     <NavigationContainer>
       {Platform.OS === "ios" && (
