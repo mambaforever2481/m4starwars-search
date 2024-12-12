@@ -7,10 +7,33 @@ import Planets from "./Planets";
 import Films from "./Films";
 import Spaceships from "./Spaceships";
 import React, {useEffect} from "react";
+import LazyImage from './LazyImage';
+import { Button, View, Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+const remote = "https://reactnative.dev/docs/assets/favicon.png";
+
+function LazyLoading() {
+  const [source, setSource] = useState(null);
+
+  return (
+    <View style={styles.container}>
+      <LazyImage
+        style={{ width: 200, height: 150 }}
+        resizeMode="contain"
+        source={source}
+      />
+      <Button
+        label="Load Remote"
+        onPress={() => {
+          setSource({ uri: remote });
+        }}
+      />
+    </View>
+  );
+}
 
 export default function App() {
 

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { View, Text, TextInput } from "react-native";
+import Animated, {SlideInLeft, SlideOutRight} from "react-native-reanimated";
 import {useSwapi} from "react-swapi";
 import Swipeable from "./Swipeable";
 
@@ -33,27 +34,11 @@ export default function Films({ navigation }) {
     const [submittedText, setSubmittedText] = useState("");
   
     return (
-      <View style={styles.container}>
-        <Input label="Basic Text Input:" />
-        <Input label="Password Input:" secureTextEntry />
-        <Input label="Return Key:" returnKeyType="search" />
-        <Input label="Placeholder Text:" placeholder="Search" />
-        <Input
-          label="Input Events:"
-          onChangeText={(e) => {
-            setChangedText(e);
-          }}
-          onSubmitEditing={(e) => {
-            setSubmittedText(e.nativeEvent.text);
-          }}
-          onFocus={() => {
-            setChangedText("");
-            setSubmittedText("");
-          }}
-        />
-        <Text>Changed: {changedText}</Text>
-        <Text>Submitted: {submittedText}</Text>
-      </View>
+      <Animated.View entering={SlideInLeft} exiting={SlideOutRight}>
+      <TouchableOpacity onPress={() => onPress(id)} style={styles.todoItem}>
+        <Text>{title}</Text>
+      </TouchableOpacity>
+    </Animated.View>
     );
   }
   
